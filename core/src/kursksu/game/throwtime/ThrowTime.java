@@ -1,31 +1,63 @@
 package kursksu.game.throwtime;
 
-import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Screen;
+import kursksu.game.throwtime.screens.MenuScreen;
+import kursksu.game.throwtime.screens.GameScreen;
+import kursksu.game.throwtime.screens.SettingsScreen;
 
-public class ThrowTime extends ApplicationAdapter {
-	SpriteBatch batch;
-	Texture img;
-	
+/**
+ * Main class of a game.
+ * Uses for changing screens and containing some param.
+ */
+public class ThrowTime extends Game {
+
+	private Settings gameSettings;
+
+	private MenuScreen menuScreen;
+	private GameScreen gameScreen;
+	private SettingsScreen settingsScreen;
+
+	public static final int MENU     = 0;
+	public static final int GAME     = 1;
+	public static final int SETTINGS = 2;
+
+	/**
+	 * First call in a game
+	 */
 	@Override
-	public void create () {
-		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
+	public void create() {
+		gameSettings = new Settings();
+		gameSettings.result();
+		changeScreen(MENU);
 	}
 
-	@Override
-	public void render () {
-		ScreenUtils.clear(1, 0, 0, 1);
-		batch.begin();
-		batch.draw(img, 0, 0);
-		batch.end();
+	/**
+	 * DEBUG: MenuScreen - BLACK
+	 * 		  GameScreen - WHITE
+	 * 		  SettingsScreen - BROWN
+	 */
+	public void changeScreen(int screen) {
+		switch(screen) {
+			case MENU:
+				if(menuScreen == null)
+					menuScreen = new MenuScreen(this);
+				this.setScreen(menuScreen);
+				break;
+			case GAME:
+				if(gameScreen == null)
+					gameScreen = new GameScreen(this);
+				this.setScreen(gameScreen);
+				break;
+			case SETTINGS:
+				if(settingsScreen == null)
+					settingsScreen = new SettingsScreen(this);
+				this.setScreen(settingsScreen);
+				break;
+		}
 	}
-	
-	@Override
-	public void dispose () {
-		batch.dispose();
-		img.dispose();
+
+	public Settings getSettings() {
+		return this.gameSettings;
 	}
 }
