@@ -5,13 +5,19 @@ import com.badlogic.gdx.Preferences;
 
 public class Settings {
 
+    /**
+     * DEBUG MODE: True - true
+     *             False - false
+     */
+    private static boolean MODE = false;
     Preferences settings;
 
     public Settings() {
-        settings = Gdx.app.getPreferences("My Preferences");
+        settings = Gdx.app.getPreferences("ThrowTimeSettings");
     }
 
-    public void result() {
-        System.out.println("Settings:\n" + settings);
+    public void all() {
+        if(MODE)
+            System.out.println(settings.get());
     }
 }

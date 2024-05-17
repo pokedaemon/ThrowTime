@@ -28,7 +28,6 @@ public class ThrowTime extends Game {
 	@Override
 	public void create() {
 		gameSettings = new Settings();
-		gameSettings.result();
 		changeScreen(MENU);
 	}
 

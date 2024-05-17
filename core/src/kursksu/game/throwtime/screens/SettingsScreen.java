@@ -5,11 +5,13 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.ScreenUtils;
 
+import kursksu.game.throwtime.ThrowTime;
+
 public class SettingsScreen implements Screen {
 
-    Game parent;
+    ThrowTime parent;
 
-    public SettingsScreen(Game parent) {
+    public SettingsScreen(ThrowTime parent) {
         this.parent = parent;
     }
 
