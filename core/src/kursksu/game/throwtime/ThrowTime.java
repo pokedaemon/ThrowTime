@@ -2,6 +2,8 @@ package kursksu.game.throwtime;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
+
+import kursksu.game.throwtime.screens.DebugScreen;
 import kursksu.game.throwtime.screens.MenuScreen;
 import kursksu.game.throwtime.screens.GameScreen;
 import kursksu.game.throwtime.screens.SettingsScreen;
@@ -18,9 +20,13 @@ public class ThrowTime extends Game {
 	private GameScreen gameScreen;
 	private SettingsScreen settingsScreen;
 
+	private DebugScreen debugScreen;
+
 	public static final int MENU     = 0;
 	public static final int GAME     = 1;
 	public static final int SETTINGS = 2;
+
+	public static final int DEBUG    = 3;
 
 	/**
 	 * First call in a game
@@ -28,7 +34,7 @@ public class ThrowTime extends Game {
 	@Override
 	public void create() {
 		gameSettings = new Settings();
-		changeScreen(MENU);
+		changeScreen(DEBUG);
 	}
 
 	/**
@@ -52,6 +58,11 @@ public class ThrowTime extends Game {
 				if(settingsScreen == null)
 					settingsScreen = new SettingsScreen(this);
 				this.setScreen(settingsScreen);
+				break;
+			case DEBUG:
+				if(debugScreen == null)
+					debugScreen = new DebugScreen(this);
+				this.setScreen(debugScreen);
 				break;
 		}
 	}
