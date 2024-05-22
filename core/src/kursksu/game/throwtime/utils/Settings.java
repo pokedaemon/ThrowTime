@@ -1,4 +1,4 @@
-package kursksu.game.throwtime;
+package kursksu.game.throwtime.utils;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
@@ -9,7 +9,7 @@ public class Settings {
      * DEBUG MODE: True - true
      *             False - false
      */
-    private static boolean MODE = false;
+    public static final boolean MODE = false;
     Preferences settings;
 
     public Settings() {
