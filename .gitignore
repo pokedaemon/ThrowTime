@@ -19,3 +19,11 @@ gradle-app.setting
 .project
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
+
+.idea
+.DS_Store
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
