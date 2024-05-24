@@ -1,0 +1,88 @@
+
+skin.png
+size: 1024, 1024
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+button-down
+  rotate: false
+  xy: 515, 644
+  size: 103, 33
+  split: 12, 9, 12, 9
+  pad: 0, 0, 0, 0
+  orig: 103, 33
+  offset: 0, 0
+  index: -1
+button-down_play
+  rotate: false
+  xy: 133, 262
+  size: 103, 33
+  split: 15, 11, 13, 10
+  pad: 0, 0, 0, 0
+  orig: 103, 33
+  offset: 0, 0
+  index: -1
+button-up
+  rotate: false
+  xy: 1, 1
+  size: 100, 30
+  split: 10, 12, 8, 11
+  pad: 0, 0, 0, 0
+  orig: 100, 30
+  offset: 0, 0
+  index: -1
+button-up_play
+  rotate: false
+  xy: 647, 779
+  size: 100, 30
+  split: 15, 11, 13, 10
+  pad: 0, 0, 0, 0
+  orig: 100, 30
+  offset: 0, 0
+  index: -1
+exit2_down
+  rotate: false
+  xy: 133, 226
+  size: 33, 34
+  split: 9, 8, 9, 8
+  pad: 0, 0, 0, 0
+  orig: 33, 34
+  offset: 0, 0
+  index: -1
+exit2_up
+  rotate: false
+  xy: 238, 264
+  size: 31, 31
+  split: 4, 8, 5, 7
+  pad: 0, 0, 0, 0
+  orig: 31, 31
+  offset: 0, 0
+  index: -1
+exit
+  rotate: false
+  xy: 1, 165
+  size: 130, 130
+  orig: 130, 130
+  offset: 0, 0
+  index: -1
+no_sound
+  rotate: false
+  xy: 515, 679
+  size: 130, 130
+  orig: 130, 130
+  offset: 0, 0
+  index: -1
+sound
+  rotate: false
+  xy: 1, 33
+  size: 130, 130
+  orig: 130, 130
+  offset: 0, 0
+  index: -1
+yoster1
+  rotate: false
+  xy: 1, 297
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1

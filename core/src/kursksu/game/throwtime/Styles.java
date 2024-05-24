@@ -3,6 +3,7 @@ package kursksu.game.throwtime;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
@@ -12,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 public class Styles {
     private FreeTypeFontGenerator generator;
@@ -24,11 +26,14 @@ public class Styles {
     private List.ListStyle list;
     private Window.WindowStyle window;
 
+
     public Styles() {
         generator = new FreeTypeFontGenerator(Gdx.files.internal("yoster.ttf"));
         BitmapFont font = setFont(75, Color.WHITE);
         label = new Label.LabelStyle();
         label.font = font;
+        label.fontColor = Color.ORANGE;
+        TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("ALL_BUTTON"));
         button = new Button.ButtonStyle();
         textButton = new TextButton.TextButtonStyle();
         imageButton = new ImageButton.ImageButtonStyle();
