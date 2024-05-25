@@ -40,6 +40,7 @@ public class DebugScreen implements Screen {
     private ThrowTime parent;
     private Stage stage;
     private Skin skin;
+    private Music music;
 
 
     public DebugScreen(ThrowTime parent) {
@@ -52,7 +53,7 @@ public class DebugScreen implements Screen {
      */
     @Override
     public void show() {
-        Music music = Gdx.audio.newMusic(Gdx.files.internal("cool.mp3"));
+        music = Gdx.audio.newMusic(Gdx.files.internal("cool.mp3"));
         music.play();
 
         parent.getSettings().all();
@@ -102,6 +103,7 @@ public class DebugScreen implements Screen {
         exit_table.add(exit).width(150).height(150);
         exit_table.row();
 
+
         Table main_table = new Table();
         main_table.setDebug(true);
         main_table.setFillParent(true);
@@ -134,7 +136,38 @@ public class DebugScreen implements Screen {
                 buttonSound.play();
             }
         });
+
+        button2.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                buttonSound.play();
+            }
+        });
+
+        button3.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                buttonSound.play();
+            }
+        });
+
+        exit.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                buttonSound.play();
+                toggleMusic();
+            }
+        });
     }
+
+    private void toggleMusic() {
+        if (music.isPlaying()) {
+            music.pause();
+        } else {
+            music.play();
+        }
+    }
+
 
                 /**
                  * Called when the screen should render itself.
