@@ -1,6 +1,6 @@
 package kursksu.game.throwtime.actors;
 
-public class Basket extends b2Object {
+public class Borders extends b2Object {
 
     @Override
     protected void setBody() {

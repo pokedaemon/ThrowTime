@@ -1,6 +1,7 @@
 package kursksu.game.throwtime.utils;
 
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 
 public class Constants {
@@ -13,8 +14,12 @@ public class Constants {
     // Ball Body
     public static final BodyDef.BodyType BALL_TYPE = BodyDef.BodyType.KinematicBody;
 
-    //
-    public static final float WIDTH = 120 * (float)16 / 9;
-    public static final float HEIGHT = 120;
+    // WU
+    public static final float WIDTH = 128;
+    public static final float HEIGHT = 256;
+
+    // PIXELS
+    public static final float SCREEN_WIDTH = Gdx.graphics.getWidth();
+    public static final float SCREEN_HEIGHT = Gdx.graphics.getHeight();
 
 }
