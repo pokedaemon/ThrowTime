@@ -1,0 +1,83 @@
+{
+"com.badlogic.gdx.graphics.g2d.BitmapFont": {
+	"yoster0": {
+		"file": "yoster1.fnt",
+		"scaledSize": -1,
+		"markupEnabled": false,
+		"flip": false
+	}
+},
+"com.badlogic.gdx.graphics.Color": {
+	"black": {
+		"r": 0,
+		"g": 0,
+		"b": 0,
+		"a": 1
+	},
+	"gray": {
+		"r": 0.90588236,
+		"g": 0.90588236,
+		"b": 0.90588236,
+		"a": 1
+	},
+	"white": {
+		"r": 1,
+		"g": 1,
+		"b": 1,
+		"a": 1
+	}
+},
+"com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle": {
+	"default": {
+		"up": "button-up",
+		"down": "button-down"
+	},
+	"play": {
+		"up": "button-up_play",
+		"down": "button-down_play"
+	},
+	"mini": {
+		"up": "exit2_up",
+		"down": "exit2_down"
+	}
+},
+"com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle": {
+	"default": {
+		"imageUp": "exit",
+		"up": "exit2_up",
+		"down": "exit2_down",
+		"pressedOffsetY": -2
+	},
+	"sound": {
+		"imageUp": "sound",
+		"imageDown": "no_sound",
+		"imageChecked": "no_sound",
+		"up": "exit2_up",
+		"down": "exit2_down",
+		"pressedOffsetY": -2
+	}
+},
+"com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle": {
+	"default": {
+		"font": "yoster0",
+		"fontColor": "gray",
+		"up": "button-up",
+		"down": "button-down",
+		"pressedOffsetY": -2
+	},
+	"play": {
+		"font": "yoster0",
+		"fontColor": "gray",
+		"up": "button-up_play",
+		"down": "button-down_play",
+		"pressedOffsetY": -2
+	},
+	"exit": {
+		"font": "yoster0",
+		"fontColor": "black",
+		"up": "exit2_up",
+		"down": "exit2_down",
+		"pressedOffsetY": -2
+	}
+}
+}
