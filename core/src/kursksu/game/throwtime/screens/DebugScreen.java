@@ -1,49 +1,33 @@
 package kursksu.game.throwtime.screens;
 
 import com.badlogic.gdx.Gdx;
-<<<<<<< HEAD
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-=======
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
-import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.ScreenUtils;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
->>>>>>> 3c1001b03fe46441bf7e1cf520405f352593bd51
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.ScreenUtils;
 
 import kursksu.game.throwtime.ThrowTime;
 import kursksu.game.throwtime.utils.Constants;
 
-<<<<<<< HEAD
 import static kursksu.game.throwtime.utils.Constants.SCREEN_WIDTH;
 import static kursksu.game.throwtime.utils.Constants.SCREEN_HEIGHT;
 
-public class DebugScreen extends State {
-=======
 public class DebugScreen implements Screen {
+    private final SpriteBatch batch;
     FreeTypeFontGenerator generator;
     BitmapFont font;
     private ThrowTime parent;
@@ -51,29 +35,34 @@ public class DebugScreen implements Screen {
     private Skin skin;
     private Music music;
 
->>>>>>> 3c1001b03fe46441bf7e1cf520405f352593bd51
-
     Sprite background;
 
     public DebugScreen(ThrowTime parent, SpriteBatch batch) {
-        super(parent, batch);
+        this.batch = batch;
+        this.parent = parent;
+        this.stage = new Stage();
     }
 
     @Override
-<<<<<<< HEAD
-    public void update(float delta) {}
+    public void pause() {
+
+    }
 
     @Override
-    public void create() {}
+    public void resume() {
+
+    }
 
     @Override
-    public void render(float delta) {
-        super.render(delta);
+    public void hide() {
 
-        batch.begin();
-        background.draw(batch);
-        batch.end();
-=======
+    }
+
+    @Override
+    public void dispose() {
+
+    }
+
     public void show() {
         music = Gdx.audio.newMusic(Gdx.files.internal("cool.mp3"));
         music.play();
@@ -182,101 +171,22 @@ public class DebugScreen implements Screen {
         });
     }
 
+    @Override
+    public void render(float delta) {
+        stage.act();
+        stage.draw();
+    }
+
+    @Override
+    public void resize(int width, int height) {
+
+    }
+
     private void toggleMusic() {
         if (music.isPlaying()) {
             music.pause();
         } else {
             music.play();
         }
-    }
-
-
-                /**
-                 * Called when the screen should render itself.
-                 *
-                 * @param delta The time in seconds since the last render.
-                 */
-        @Override
-    public void render(float delta) {
-
-
-        stage.act(delta);
-        stage.draw();
->>>>>>> 3c1001b03fe46441bf7e1cf520405f352593bd51
-    }
-
-    @Override
-    public void show() {
-        background = new Sprite(new Texture(Gdx.files.internal("background.jpg")));
-    }
-
-    @Override
-    public void pause() {
-
-    }
-
-    @Override
-    public void resume() {
-
-    }
-
-    @Override
-    public void hide() {
-
-    }
-
-    @Override
-    public void dispose() {
-<<<<<<< HEAD
-        
-    }
-
-    @Override
-    public boolean keyDown(int keycode) {
-        return false;
-    }
-
-    @Override
-    public boolean keyUp(int keycode) {
-        return false;
-    }
-
-    @Override
-    public boolean keyTyped(char character) {
-        return false;
-    }
-
-    @Override
-    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        return false;
-    }
-
-    @Override
-    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        return false;
-    }
-
-    @Override
-    public boolean touchCancelled(int screenX, int screenY, int pointer, int button) {
-        return false;
-    }
-
-    @Override
-    public boolean touchDragged(int screenX, int screenY, int pointer) {
-        return false;
-    }
-
-    @Override
-    public boolean mouseMoved(int screenX, int screenY) {
-        return false;
-    }
-
-    @Override
-    public boolean scrolled(float amountX, float amountY) {
-        return false;
-=======
-        generator.dispose();
-        stage.dispose();
->>>>>>> 3c1001b03fe46441bf7e1cf520405f352593bd51
     }
 }
