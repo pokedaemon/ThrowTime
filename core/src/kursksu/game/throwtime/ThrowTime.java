@@ -3,7 +3,6 @@ package kursksu.game.throwtime;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-import kursksu.game.throwtime.screens.DebugScreen;
 import kursksu.game.throwtime.screens.MenuScreen;
 import kursksu.game.throwtime.screens.GameScreen;
 import kursksu.game.throwtime.screens.SettingsScreen;
