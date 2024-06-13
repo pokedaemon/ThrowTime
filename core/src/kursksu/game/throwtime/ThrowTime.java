@@ -7,7 +7,7 @@ import kursksu.game.throwtime.screens.DebugScreen;
 import kursksu.game.throwtime.screens.MenuScreen;
 import kursksu.game.throwtime.screens.GameScreen;
 import kursksu.game.throwtime.screens.SettingsScreen;
-import kursksu.game.throwtime.utils.Assets;
+import kursksu.game.throwtime.utils.Manager;
 import kursksu.game.throwtime.utils.Settings;
 
 /**
@@ -17,8 +17,6 @@ import kursksu.game.throwtime.utils.Settings;
 public class ThrowTime extends Game {
 
 	private SpriteBatch batch;
-	private Assets assets;
-
 	private Settings gameSettings;
 	private MenuScreen menuScreen;
 	private GameScreen gameScreen;
@@ -38,6 +36,7 @@ public class ThrowTime extends Game {
 	public void create() {
 		batch = new SpriteBatch();
 		gameSettings = new Settings();
+		Manager.init();
 		changeScreen(DEBUG);
 	}
 
@@ -73,5 +72,11 @@ public class ThrowTime extends Game {
 
 	public Settings getSettings() {
 		return this.gameSettings;
+	}
+
+	@Override
+	public void dispose() {
+		super.dispose();
+		Manager.dispose();
 	}
 }
