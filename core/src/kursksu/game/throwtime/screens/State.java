@@ -61,4 +61,9 @@ public abstract class State implements Screen, InputProcessor {
     public void hide() {
         dispose();
     }
+
+    @Override
+    public void show() {
+        create();
+    }
 }

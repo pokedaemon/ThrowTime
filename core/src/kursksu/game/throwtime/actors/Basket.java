@@ -1,24 +1,27 @@
 package kursksu.game.throwtime.actors;
 
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
+
 public class Basket extends b2Object {
 
-    @Override
-    protected void setBody() {
-
+    public Basket() {
+        super();
     }
 
     @Override
-    protected void setBody(float pos_x, float pos_y) {
-
+    protected Sprite setPicture() {
+        return null;
     }
 
     @Override
-    protected void setFixture() {
-
+    protected BodyDef setBody() {
+        return null;
     }
 
     @Override
-    protected void setSprite() {
-
+    protected FixtureDef setFixture() {
+        return null;
     }
 }

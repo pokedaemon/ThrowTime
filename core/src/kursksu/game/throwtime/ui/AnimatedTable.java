@@ -1,19 +1,31 @@
 package kursksu.game.throwtime.ui;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.math.Interpolation;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.actions.AlphaAction;
+import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
 import kursksu.game.throwtime.utils.Constants;
 
 public abstract class AnimatedTable extends Actor {
+
     protected Table table;
+    private OrientationFrom orientation;
     private Status status;
-    private OrientationFrom orientationFrom;
-    private boolean isAnimate;
-    private float time;
     private float maxTime;
+
+    public AnimatedTable() {
+        table = prepareTable();
+        table.setTouchable(Touchable.enabled);
+        maxTime = 1f;
+        orientation = OrientationFrom.Bottom;
+    }
 
     public enum OrientationFrom {
         Left,
@@ -22,41 +34,19 @@ public abstract class AnimatedTable extends Actor {
         Bottom
     }
 
+    // TODO: include using status in code and etc.
     public enum Status {
         Hided,
-        Enabled,
-        AnimToEnable,
-        AnimToHided
+        Enable
     }
 
-    public Status getStatus() {
-        return status;
-    }
-
+    // setters
     public void setOrientation(OrientationFrom orientationFrom) {
-        this.orientationFrom = orientationFrom;
-    }
-
-    public OrientationFrom getOrientation() {
-        return orientationFrom;
-    }
-
-    public float getMaxTime() {
-        return maxTime;
+        this.orientation = orientationFrom;
     }
 
     public void setMaxTime(float maxTime) {
         this.maxTime = maxTime;
-    }
-
-    public AnimatedTable() {
-        table = prepareTable();
-        table.setTouchable(Touchable.enabled);
-        status = Status.Enabled;
-        orientationFrom = OrientationFrom.Left;
-        isAnimate = false;
-        time = 0;
-        maxTime = 1;
     }
 
     @Override
@@ -83,12 +73,31 @@ public abstract class AnimatedTable extends Actor {
         table.setY(y);
     }
 
+    // getters
+
+    public OrientationFrom getOrientation() {
+        return orientation;
+    }
+
+    public float getMaxTime() {
+        return maxTime;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    // TODO: other override stuff
+
+    public boolean isAnimate() {
+        return table.getActions().size > 0;
+    }
+
     @Override
     public Actor hit(float x, float y, boolean touchable) {
-        if(status == Status.Enabled)
+        if(!isAnimate())
             return table.hit(x, y, touchable);
-        else
-            return null;
+        return null;
     }
 
     @Override
@@ -98,86 +107,115 @@ public abstract class AnimatedTable extends Actor {
 
     @Override
     public void act(float delta) {
-        if (status == Status.Enabled)
-            table.act(delta);
-        else {
-            if (status == Status.AnimToEnable) {
-                time += delta;
-                if (time > maxTime * 1.65) {
-                    status = Status.Enabled;
-                    isAnimate = false;
-                    time = 0;
-                }
-            }
-            if (status == Status.AnimToHided) {
-                time += delta;
-                if (time > maxTime * 1.65) {
-                    status = Status.Hided;
-                    isAnimate = false;
-                    time = 0;
-                }
-            }
-        }
+        table.act(delta);
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        float x = getX();
-        float y = getY();
-
-        // x(t) = (x1 - x0) * (t / maxT) + x0
-        // y(t) = (y1 - y0) * (t / maxT) + y0
-        if(isAnimate) {
-            float ax = 0, ay = 0, bx = getX(), by = getY();
-            if(orientationFrom == OrientationFrom.Left) {
-                ax = (x + getWidth()) / maxTime;
-                bx = -getWidth();
-            }
-            if(orientationFrom == OrientationFrom.Right) {
-                ax = (x - Constants.SCREEN_WIDTH) / maxTime;
-                bx = Constants.SCREEN_WIDTH;
-            }
-            if(orientationFrom == OrientationFrom.Top) {
-                ay = (y + getHeight()) / maxTime;
-                by = -getWidth();
-            }
-            if(orientationFrom == OrientationFrom.Bottom) {
-                ay = (y - getHeight()) / maxTime;
-                by = Constants.SCREEN_HEIGHT;
-            }
-
-            if(status == Status.AnimToEnable) {
-                x = ax * time + bx;
-                y = ay * time + by;
-            }
-            if(status == Status.AnimToHided) {
-                x = ax * (maxTime - time) + bx;
-                y = ay * (maxTime - time) + by;
-            }
-        }
-
-        table.setX(x);
-        table.setY(y);
-
-        if(status != Status.Hided)
-            table.draw(batch, parentAlpha);
+        table.draw(batch, parentAlpha);
     }
 
     public void show() {
-        if(status == Status.Hided) {
-            status = Status.AnimToEnable;
-            time = 0;
-            isAnimate = true;
+        Vector2 start = getVectorFrom();
+
+        Action actionTop = new SequenceAction(
+                Actions.moveBy(0, -start.len() * 3, maxTime, Interpolation.circle)
+        );
+
+        Action actionBottom = new SequenceAction(
+                Actions.moveBy(0, start.len() * 3, maxTime, Interpolation.circle)
+        );
+
+        Action actionRight = new SequenceAction(
+                Actions.moveBy(-start.len() * 3, 0, maxTime, Interpolation.circle)
+        );
+
+        Action actionLeft = new SequenceAction(
+                Actions.moveBy(start.len() * 3, 0, maxTime, Interpolation.circle)
+        );
+
+        switch(orientation) {
+            case Top:
+                table.addAction(actionTop);
+                break;
+            case Bottom:
+                table.addAction(actionBottom);
+                break;
+            case Left:
+                table.addAction(actionLeft);
+                break;
+            case Right:
+                table.addAction(actionRight);
+                break;
         }
     }
 
     public void hide() {
-        if(status == Status.Enabled) {
-            status = Status.AnimToHided;
-            time = 0;
-            isAnimate = true;
+        Vector2 start = getVectorFrom();
+
+        Action actionTop = new SequenceAction(
+                Actions.moveBy(0, start.len() * 3, maxTime, Interpolation.exp5)
+        );
+
+        Action actionBottom = new SequenceAction(
+                Actions.moveBy(0, -start.len() * 3, maxTime, Interpolation.exp5)
+        );
+
+        Action actionRight = new SequenceAction(
+                Actions.moveBy(start.len() * 3, 0, maxTime, Interpolation.exp5)
+        );
+
+        Action actionLeft = new SequenceAction(
+                Actions.moveBy(-start.len() * 3, 0, maxTime, Interpolation.exp5)
+        );
+
+        switch(orientation) {
+            case Top:
+                table.addAction(actionTop);
+                break;
+            case Bottom:
+                table.addAction(actionBottom);
+                break;
+            case Left:
+                table.addAction(actionLeft);
+                break;
+            case Right:
+                table.addAction(actionRight);
+                break;
         }
     }
 
+    public void setFillParent(boolean value) {
+        table.setFillParent(value);
+    }
+
+    private Vector2 getVectorFrom() {
+        Vector2 start = Vector2.Zero;
+        switch (this.orientation) {
+            case Left:
+                start = new Vector2(-getWidth(), getY());
+                break;
+            case Right:
+                start = new Vector2(0, getY());
+                break;
+            case Top:
+                start = new Vector2(getX(), 0);
+                break;
+            case Bottom:
+                start = new Vector2(getX(), -getHeight());
+                break;
+            default:
+                break;
+        }
+        return start;
+    }
+
+    private void moveToHide(OrientationFrom orientation) {
+        Vector2 start = getVectorFrom();
+        table.setX(start.x);
+        table.setY(start.y);
+    }
+
+    // to override
     protected abstract Table prepareTable();
 }

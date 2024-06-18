@@ -6,14 +6,9 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 
 public class Constants {
 
-    // TODO: Delete this box2d shit
-    // ball fixture
-    public static final float BALL_RESTITUTION = .75f;
-    public static final float BALL_FRICTION    = .25f;
-    public static final float BALL_DENSITY     = 2.5f;
-
-    // ball body
-    public static final BodyDef.BodyType BALL_TYPE = BodyDef.BodyType.KinematicBody;
+    // world phys units
+    public static final float PHYS_W = 1;
+    public static final float PHYS_H = 2;
 
     // world units
     public static final float WIDTH = 108;
@@ -27,4 +22,15 @@ public class Constants {
     public static final String musicPath = "music/";
     public static final String soundPath = "sound/";
     public static final String picturesPath = "pic/";
+
+    // ext
+    public static final String png = ".png";
+    public static final String mp3 = ".mp3";
+
+    // in code we use
+    public static final String background = "Background_mini";
+    public static final String bando = "bando_mini";
+    public static final String chalkin = "chalkin_mini";
+    public static final String chubik = "chubik";
+    public static final String ground = "ground_mini1";
 }

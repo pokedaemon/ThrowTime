@@ -1,10 +1,17 @@
 package kursksu.game.throwtime.screens;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.graphics.Color;
 
 import kursksu.game.throwtime.ThrowTime;
+import kursksu.game.throwtime.ui.GameUIPanel;
+import kursksu.game.throwtime.utils.GameWorld;
 
 public class GameScreen extends State {
+
+    private GameWorld world;
+    private GameUIPanel hud;
 
     public GameScreen(ThrowTime parent, SpriteBatch batch) {
         super(parent, batch);

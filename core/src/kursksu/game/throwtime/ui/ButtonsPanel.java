@@ -12,10 +12,14 @@ import kursksu.game.throwtime.utils.Manager;
 
 public class ButtonsPanel extends AnimatedTable {
 
+    private boolean playPressed, settingsPressed, exitPressed;
+
     @Override
     protected Table prepareTable() {
         Skin skin = Manager.getSkin();
         Table main = new Table();
+
+        playPressed = settingsPressed = exitPressed = false;
 
         TextButton playButton = new TextButton("PLAY", skin);
         TextButton settingsButton = new TextButton("SETTINGS", skin);
@@ -29,7 +33,7 @@ public class ButtonsPanel extends AnimatedTable {
         main.add(exitButton).width(650).height(150);
         main.row();
 
-        Sound buttonSound = Manager.getSound("button_sound.mp3");
+        Sound buttonSound = Manager.getSound("button_sound");
         final AnimatedTable buttonsPanel = this;
 
         playButton.addListener(
@@ -37,6 +41,8 @@ public class ButtonsPanel extends AnimatedTable {
                     @Override
                     public void changed(ChangeEvent event, Actor actor) {
                         buttonSound.play();
+                        buttonsPanel.setOrientation(OrientationFrom.Top);
+                        playPressed = true;
                         buttonsPanel.hide();
                     }
                 }
@@ -47,6 +53,9 @@ public class ButtonsPanel extends AnimatedTable {
                     @Override
                     public void changed(ChangeEvent event, Actor actor) {
                         buttonSound.play();
+                        buttonsPanel.setOrientation(OrientationFrom.Right);
+                        settingsPressed = true;
+                        buttonsPanel.hide();
                     }
                 }
         );
@@ -56,7 +65,9 @@ public class ButtonsPanel extends AnimatedTable {
                     @Override
                     public void changed(ChangeEvent event, Actor actor) {
                         buttonSound.play();
-                        Gdx.app.exit();
+                        buttonsPanel.setOrientation(OrientationFrom.Bottom);
+                        exitPressed = true;
+                        buttonsPanel.hide();
                     }
                 }
         );
@@ -64,7 +75,27 @@ public class ButtonsPanel extends AnimatedTable {
         return main;
     }
 
-    public void setFillParent(boolean value) {
-        table.setFillParent(value);
+    public boolean isExitPressed() {
+        return exitPressed;
+    }
+
+    public boolean isPlayPressed() {
+        return playPressed;
+    }
+
+    public boolean isSettingsPressed() {
+        return settingsPressed;
+    }
+
+    public void setPlayPressed(boolean playPressed) {
+        this.playPressed = playPressed;
+    }
+
+    public void setSettingsPressed(boolean settingsPressed) {
+        this.settingsPressed = settingsPressed;
+    }
+
+    public void setExitPressed(boolean exitPressed) {
+        this.exitPressed = exitPressed;
     }
 }

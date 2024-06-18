@@ -20,22 +20,26 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 
 import kursksu.game.throwtime.ThrowTime;
+import kursksu.game.throwtime.ui.AnimatedTable;
+import kursksu.game.throwtime.ui.ButtonsPanel;
+import kursksu.game.throwtime.ui.LabelPanel;
+import kursksu.game.throwtime.utils.Constants;
 import kursksu.game.throwtime.utils.Manager;
 
 public class MenuScreen extends State {
 
     private BitmapFont font;
     private Stage stage;
-    private Skin skin;
     private Music music;
-
-    boolean playPressed, settingsPressed;
+    private ButtonsPanel buttons;
+    private LabelPanel label;
 
     public MenuScreen(ThrowTime parent, SpriteBatch batch) {
         super(parent, batch);
         stage = new Stage();
-        background = new Sprite(Manager.getTexture("Background_mini.png"));
-        playPressed = settingsPressed = false;
+        background = new Sprite(Manager.getTexture("Background_mini"));
+        buttons = new ButtonsPanel();
+        label = new LabelPanel();
     }
 
     @Override
@@ -45,6 +49,27 @@ public class MenuScreen extends State {
         background.draw(batch);
         batch.end();
         stage.draw();
+
+        if(buttons.isPlayPressed()) {
+            label.hide();
+            if(!buttons.isAnimate()) {
+                buttons.setPlayPressed(false);
+                parent.changeScreen(ThrowTime.GAME);
+            }
+        }
+        if(buttons.isSettingsPressed()) {
+            if(!buttons.isAnimate()) {
+                buttons.setSettingsPressed(false);
+                parent.changeScreen(ThrowTime.SETTINGS);
+            }
+        }
+        if(buttons.isExitPressed()) {
+            label.hide();
+            if(!buttons.isAnimate()) {
+                buttons.setExitPressed(false);
+                Gdx.app.exit();
+            }
+        }
     }
 
     @Override
@@ -54,89 +79,26 @@ public class MenuScreen extends State {
     public void show() {
         Gdx.input.setInputProcessor(stage);
 
-        Table main = new Table();
-        Table label = new Table();
+        label.setX((float) Gdx.graphics.getWidth() / 2);
+        label.setY((float) Gdx.graphics.getHeight() / (4.05f / 4f));
+        label.setOrientation(AnimatedTable.OrientationFrom.Top);
+        label.setMaxTime(0.0f);
+        label.hide();
 
-        main.setFillParent(true);
-        label.setFillParent(true);
+        label.setMaxTime(1.4f);
+        label.show();
 
-        music = Manager.getMusic("cool.mp3");
-        music.play();
+        buttons.setFillParent(true);
+        buttons.setX((float) Gdx.graphics.getWidth() / 2);
+        buttons.setY((float) Gdx.graphics.getHeight() / 2);
+        buttons.setMaxTime(0.0f);
+        buttons.hide();
 
-        // font settings
-        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(
-                Gdx.files.internal("yoster2.ttf")
-        );
-        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.
-                FreeTypeFontParameter();
+        buttons.setMaxTime(0.8f);
+        buttons.show();
 
-        parameter.size = 120;
-        parameter.color = Color.ORANGE;
-        parameter.shadowOffsetX = 1;
-        parameter.shadowOffsetY = 1;
-
-        font = generator.generateFont(parameter);
-
-        Label.LabelStyle styleLabel = new Label.LabelStyle();
-        styleLabel.font = font;
-
-        generator.dispose();
-        // *****
-
-        // title
-        Label title = new Label("Throw Time", styleLabel);
-
-        label.top().pad(300);
-        label.add(title);
-        // *****
-
-        skin = Manager.getSkin();
-
-        // buttons of menu
-        TextButton playButton = new TextButton("PLAY", skin);
-        TextButton settingsButton = new TextButton("SETTINGS", skin);
-        TextButton exitButton = new TextButton("EXIT", skin);
-
-        main.center();
-        main.add(playButton).width(650).height(150);
-        main.row();
-        main.add(settingsButton).width(650).height(150).pad(40);
-        main.row();
-        main.add(exitButton).width(650).height(150);
-        main.row();
-        // *****
-
-        // sounds of buttons
-        Sound buttonSound = Manager.getSound("button_sound.mp3");
-
-        playButton.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                buttonSound.play();
-                main.addAction(Actions.moveBy(-(main.getX() + main.getWidth()), 0f, 1f, Interpolation.smooth2));
-                playPressed = true;
-            }
-        });
-
-        settingsButton.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                buttonSound.play();
-                main.addAction(Actions.moveBy((main.getX() + main.getWidth()), 0f, 1f, Interpolation.smooth2));
-                settingsPressed = true;
-            }
-        });
-
-        exitButton.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                buttonSound.play();
-                Gdx.app.exit();
-            }
-        });
-
+        stage.addActor(buttons);
         stage.addActor(label);
-        stage.addActor(main);
     }
 
     @Override
@@ -152,8 +114,6 @@ public class MenuScreen extends State {
     @Override
     public void dispose() {
         stage.dispose();
-        font.dispose();
-        skin.dispose();
     }
 
     @Override

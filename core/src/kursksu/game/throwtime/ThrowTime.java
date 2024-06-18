@@ -37,7 +37,7 @@ public class ThrowTime extends Game {
 		batch = new SpriteBatch();
 		gameSettings = new Settings();
 		Manager.init();
-		changeScreen(DEBUG);
+		changeScreen(MENU);
 	}
 
 	/**
