@@ -224,6 +224,14 @@ touch_b
   orig: 200, 200
   offset: 0, 0
   index: -1
+touch_b
+  rotate: false
+  xy: 515, 1123
+  size: 200, 200
+  split: 0, 0, 0, 0
+  orig: 200, 200
+  offset: 0, 0
+  index: -1
 touch_m
   rotate: false
   xy: 515, 1069

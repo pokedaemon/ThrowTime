@@ -27,6 +27,17 @@
 		"a": 1
 	}
 },
+"com.badlogic.gdx.scenes.scene2d.ui.Skin$TintedDrawable": {
+	"touch_b_chek": {
+		"name": "touch_b",
+		"color": {
+			"r": 0.30980393,
+			"g": 0.9607843,
+			"b": 0.99215686,
+			"a": 1
+		}
+	}
+},
 "com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle": {
 	"default": {
 		"up": "button-up",
@@ -43,12 +54,13 @@
 },
 "com.badlogic.gdx.scenes.scene2d.ui.CheckBox$CheckBoxStyle": {
 	"default": {
-		"checkboxOn": "touch_b",
+		"checkboxOn": "exit",
 		"checkboxOff": "yes_b",
 		"font": "yoster0",
 		"fontColor": "white",
 		"up": "touch_b",
 		"down": "exit_b_d",
+		"over": "touch_b_chek",
 		"pressedOffsetY": -2
 	}
 },
