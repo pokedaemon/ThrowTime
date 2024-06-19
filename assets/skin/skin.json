@@ -41,20 +41,46 @@
 		"down": "exit2_down"
 	}
 },
+"com.badlogic.gdx.scenes.scene2d.ui.CheckBox$CheckBoxStyle": {
+	"default": {
+		"checkboxOn": "touch_b",
+		"checkboxOff": "yes_b",
+		"font": "yoster0",
+		"fontColor": "white",
+		"up": "touch_b",
+		"down": "exit_b_d",
+		"pressedOffsetY": -2
+	}
+},
 "com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle": {
 	"default": {
 		"imageUp": "exit",
-		"up": "exit2_up",
-		"down": "exit2_down",
+		"up": "touch_b",
+		"down": "exit_b_d",
 		"pressedOffsetY": -2
 	},
 	"sound": {
 		"imageUp": "sound",
 		"imageDown": "no_sound",
 		"imageChecked": "no_sound",
-		"up": "exit2_up",
-		"down": "exit2_down",
+		"up": "touch_b",
+		"down": "exit_b_d",
 		"pressedOffsetY": -2
+	}
+},
+"com.badlogic.gdx.scenes.scene2d.ui.ProgressBar$ProgressBarStyle": {
+	"default-horizontal": {
+		"background": "progressbar_back_b",
+		"knob": "patron2",
+		"knobBefore": "progressbar_back_left2_b2"
+	}
+},
+"com.badlogic.gdx.scenes.scene2d.ui.Slider$SliderStyle": {
+	"default-horizontal": {
+		"knobDown": "knob_act_b",
+		"background": "backg_b",
+		"knob": "knob_b",
+		"knobBefore": "backg_b_after"
 	}
 },
 "com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle": {
@@ -68,7 +94,7 @@
 	"play": {
 		"font": "yoster0",
 		"fontColor": "gray",
-		"up": "button-up_play",
+		"up": "button-up",
 		"down": "button-down_play",
 		"pressedOffsetY": -2
 	},
@@ -78,6 +104,12 @@
 		"up": "exit2_up",
 		"down": "exit2_down",
 		"pressedOffsetY": -2
+	}
+},
+"com.badlogic.gdx.scenes.scene2d.ui.Touchpad$TouchpadStyle": {
+	"default": {
+		"background": "touch_b",
+		"knob": "yes_b"
 	}
 }
 }

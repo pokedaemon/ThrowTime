@@ -1,12 +1,45 @@
 
 skin.png
-size: 1024, 1024
+size: 2048, 2048
 format: RGBA8888
 filter: Linear, Linear
 repeat: none
+backg
+  rotate: false
+  xy: 717, 1383
+  size: 100, 10
+  split: 0, 0, 0, 0
+  orig: 100, 10
+  offset: 0, 0
+  index: -1
+backg_b
+  rotate: false
+  xy: 1, 1933
+  size: 1000, 100
+  split: 0, 0, 0, 0
+  orig: 1000, 100
+  offset: 0, 0
+  index: -1
+backg_b_after
+  rotate: false
+  xy: 1, 1831
+  size: 1000, 100
+  split: 0, 0, 0, 0
+  orig: 1000, 100
+  offset: 0, 0
+  index: -1
+backg_m_after
+  rotate: false
+  xy: 1905, 1891
+  size: 100, 10
+  split: 0, 2, 0, 0
+  pad: 0, 0, 0, 0
+  orig: 100, 10
+  offset: 0, 0
+  index: -1
 button-down
   rotate: false
-  xy: 515, 644
+  xy: 1003, 1848
   size: 103, 33
   split: 12, 9, 12, 9
   pad: 0, 0, 0, 0
@@ -15,7 +48,7 @@ button-down
   index: -1
 button-down_play
   rotate: false
-  xy: 133, 262
+  xy: 405, 978
   size: 103, 33
   split: 15, 11, 13, 10
   pad: 0, 0, 0, 0
@@ -24,7 +57,7 @@ button-down_play
   index: -1
 button-up
   rotate: false
-  xy: 1, 1
+  xy: 515, 1091
   size: 100, 30
   split: 10, 12, 8, 11
   pad: 0, 0, 0, 0
@@ -33,16 +66,23 @@ button-up
   index: -1
 button-up_play
   rotate: false
-  xy: 647, 779
+  xy: 1, 475
   size: 100, 30
   split: 15, 11, 13, 10
   pad: 0, 0, 0, 0
   orig: 100, 30
   offset: 0, 0
   index: -1
+exit
+  rotate: false
+  xy: 1905, 1903
+  size: 130, 130
+  orig: 130, 130
+  offset: 0, 0
+  index: -1
 exit2_down
   rotate: false
-  xy: 133, 226
+  xy: 849, 1491
   size: 33, 34
   split: 9, 8, 9, 8
   pad: 0, 0, 0, 0
@@ -51,37 +91,168 @@ exit2_down
   index: -1
 exit2_up
   rotate: false
-  xy: 238, 264
+  xy: 335, 778
   size: 31, 31
   split: 4, 8, 5, 7
   pad: 0, 0, 0, 0
   orig: 31, 31
   offset: 0, 0
   index: -1
-exit
+exit_b_d
   rotate: false
-  xy: 1, 165
-  size: 130, 130
-  orig: 130, 130
+  xy: 515, 1325
+  size: 200, 200
+  split: 0, 0, 10, 9
+  pad: 0, 0, 0, 0
+  orig: 200, 200
+  offset: 0, 0
+  index: -1
+knob
+  rotate: false
+  xy: 1108, 1861
+  size: 20, 20
+  split: 0, 1, 0, 1
+  pad: 0, 0, 0, 0
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+knob_act
+  rotate: false
+  xy: 405, 956
+  size: 20, 20
+  split: 0, 1, 0, 1
+  pad: 0, 0, 0, 0
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+knob_act_b
+  rotate: false
+  xy: 1, 709
+  size: 200, 200
+  split: 0, 10, 0, 9
+  pad: 0, 0, 0, 10
+  orig: 200, 200
+  offset: 0, 0
+  index: -1
+knob_b
+  rotate: false
+  xy: 203, 811
+  size: 200, 200
+  split: 0, 10, 0, 9
+  pad: 0, 0, 0, 10
+  orig: 200, 200
   offset: 0, 0
   index: -1
 no_sound
   rotate: false
-  xy: 515, 679
+  xy: 717, 1395
   size: 130, 130
   orig: 130, 130
+  offset: 0, 0
+  index: -1
+patron
+  rotate: false
+  xy: 1003, 1836
+  size: 20, 10
+  split: 5, 4, 2, 1
+  pad: 0, 0, 0, 0
+  orig: 20, 10
+  offset: 0, 0
+  index: -1
+patron2
+  rotate: false
+  xy: 1, 911
+  size: 200, 100
+  split: 63, 63, 28, 32
+  pad: 0, 0, 0, 0
+  orig: 200, 100
+  offset: 0, 0
+  index: -1
+progressbar_back
+  rotate: false
+  xy: 903, 1814
+  size: 90, 15
+  split: 0, 0, 0, 0
+  orig: 90, 15
+  offset: 0, 0
+  index: -1
+progressbar_back_b
+  rotate: false
+  xy: 1003, 1883
+  size: 900, 150
+  split: 0, 0, 0, 0
+  orig: 900, 150
+  offset: 0, 0
+  index: -1
+progressbar_back_left2
+  rotate: false
+  xy: 203, 662
+  size: 90, 15
+  split: 0, 0, 0, 0
+  orig: 90, 15
+  offset: 0, 0
+  index: -1
+progressbar_back_left2_b
+  rotate: false
+  xy: 1, 1679
+  size: 900, 150
+  split: 0, 0, 0, 0
+  orig: 900, 150
+  offset: 0, 0
+  index: -1
+progressbar_back_left2_b2
+  rotate: false
+  xy: 1, 1527
+  size: 900, 150
+  split: 40, 20, 41, 30
+  pad: 0, 0, 0, 0
+  orig: 900, 150
   offset: 0, 0
   index: -1
 sound
   rotate: false
-  xy: 1, 33
+  xy: 203, 679
   size: 130, 130
   orig: 130, 130
   offset: 0, 0
   index: -1
+touch_b
+  rotate: false
+  xy: 515, 1123
+  size: 200, 200
+  split: 0, 0, 0, 0
+  orig: 200, 200
+  offset: 0, 0
+  index: -1
+touch_m
+  rotate: false
+  xy: 515, 1069
+  size: 20, 20
+  split: 0, 0, 0, 0
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+yes_b
+  rotate: false
+  xy: 1, 507
+  size: 200, 200
+  split: 9, 9, 19, 8
+  pad: 0, 0, 0, 0
+  orig: 200, 200
+  offset: 0, 0
+  index: -1
+yes_m
+  rotate: false
+  xy: 617, 1101
+  size: 20, 20
+  split: 1, 1, 2, 1
+  pad: 0, 0, 0, 0
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
 yoster1
   rotate: false
-  xy: 1, 297
+  xy: 1, 1013
   size: 512, 512
   orig: 512, 512
   offset: 0, 0
