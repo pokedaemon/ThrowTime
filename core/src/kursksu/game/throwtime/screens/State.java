@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
@@ -20,8 +21,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import kursksu.game.throwtime.ThrowTime;
 import kursksu.game.throwtime.utils.Constants;
 
-public abstract class State implements Screen, InputProcessor {
-
+public abstract class State implements Screen {
     protected ThrowTime parent;
     protected final SpriteBatch batch;
     protected final OrthographicCamera camera;

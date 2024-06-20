@@ -3,6 +3,8 @@ package kursksu.game.throwtime;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import kursksu.game.throwtime.screens.DebugScreen;
+import kursksu.game.throwtime.screens.LoadingScreen;
 import kursksu.game.throwtime.screens.MenuScreen;
 import kursksu.game.throwtime.screens.GameScreen;
 import kursksu.game.throwtime.screens.SettingsScreen;
@@ -21,22 +23,26 @@ public class ThrowTime extends Game {
 	private GameScreen gameScreen;
 	private SettingsScreen settingsScreen;
 	private DebugScreen debugScreen;
+	private LoadingScreen loadingScreen;
 
 	public static final int MENU     = 0;
 	public static final int GAME     = 1;
 	public static final int SETTINGS = 2;
+	public static final int LOADING  = 4;
 
 	public static final int DEBUG    = 3;
+
+	private boolean start;
 
 	/**
 	 * First call in a game
 	 */
 	@Override
 	public void create() {
+		start = true;
 		batch = new SpriteBatch();
 		gameSettings = new Settings();
-		Manager.init();
-		changeScreen(MENU);
+        changeScreen(LOADING);
 	}
 
 	/**
@@ -66,11 +72,24 @@ public class ThrowTime extends Game {
 					debugScreen = new DebugScreen(this, batch);
 				this.setScreen(debugScreen);
 				break;
+			case LOADING:
+				if(loadingScreen == null)
+					loadingScreen = new LoadingScreen(this, batch);
+				this.setScreen(loadingScreen);
+				break;
 		}
 	}
 
 	public Settings getSettings() {
 		return this.gameSettings;
+	}
+
+	public void setStart(boolean value) {
+		this.start = value;
+	}
+
+	public boolean getStart() {
+		return this.start;
 	}
 
 	@Override

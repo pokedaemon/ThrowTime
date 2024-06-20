@@ -7,7 +7,13 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
-public class LabelPanel extends AnimatedTable {
+import kursksu.game.throwtime.ThrowTime;
+
+public final class LabelPanel extends AnimatedTable {
+
+    public LabelPanel(ThrowTime parent) {
+        super(parent);
+    }
 
     @Override
     protected Table prepareTable() {

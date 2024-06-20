@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Disposable;
 
+import static kursksu.game.throwtime.utils.Constants.ball;
 import static kursksu.game.throwtime.utils.Constants.musicPath;
 import static kursksu.game.throwtime.utils.Constants.soundPath;
 import static kursksu.game.throwtime.utils.Constants.picturesPath;
@@ -26,12 +27,7 @@ public class Manager {
 
     private static final AssetManager manager = new AssetManager();
 
-    public static void init() {
-        // sound
-        manager.load(soundPath + "button_sound.mp3", Sound.class);
-
-        // music
-        manager.load(musicPath + "cool.mp3", Music.class);
+    public static void init() throws InterruptedException {
 
         // pictures
         manager.load(picturesPath + background + png, Texture.class);
@@ -39,11 +35,30 @@ public class Manager {
         manager.load(picturesPath + chalkin + png, Texture.class);
         manager.load(picturesPath + chubik + png, Texture.class);
         manager.load(picturesPath + ground + png, Texture.class);
+        manager.load(picturesPath + ball + png, Texture.class);
+        Thread.sleep(3);
+
+        // sound
+        manager.load(soundPath + "button_sound" + mp3, Sound.class);
+        manager.load(soundPath + "ball_bounce" + mp3, Sound.class);
+        manager.load(soundPath + "ball_net" + mp3, Sound.class);
+        manager.load(soundPath + "ball_hit_bounce" + mp3, Sound.class);
+        manager.load(soundPath + "pistol_fire" + mp3, Sound.class);
+        Thread.sleep(15);
+
+        // music
+        manager.load(musicPath + "music.mp3", Music.class);
+        Thread.sleep(2);
+
 
         // skin
         manager.load("skin/skin.json", Skin.class);
-
-        manager.finishLoading();
+        if(manager.contains(picturesPath + background + png, Texture.class))
+            manager.finishLoading();
+        else {
+            Gdx.app.log("Manager", "Background is not loaded!");
+            Gdx.app.exit();
+        }
     }
 
     public static Music getMusic(String path) {

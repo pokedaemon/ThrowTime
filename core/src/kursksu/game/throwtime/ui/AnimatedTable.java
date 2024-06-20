@@ -11,16 +11,19 @@ import com.badlogic.gdx.scenes.scene2d.actions.AlphaAction;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
+import kursksu.game.throwtime.ThrowTime;
 import kursksu.game.throwtime.utils.Constants;
 
 public abstract class AnimatedTable extends Actor {
 
+    protected ThrowTime parent;
     protected Table table;
     private OrientationFrom orientation;
     private Status status;
     private float maxTime;
 
-    public AnimatedTable() {
+    public AnimatedTable(ThrowTime parent) {
+        this.parent = parent;
         table = prepareTable();
         table.setTouchable(Touchable.enabled);
         maxTime = 1f;
@@ -119,19 +122,19 @@ public abstract class AnimatedTable extends Actor {
         Vector2 start = getVectorFrom();
 
         Action actionTop = new SequenceAction(
-                Actions.moveBy(0, -start.len() * 3, maxTime, Interpolation.circle)
+                Actions.moveBy(0, -start.len() * 3, maxTime, Interpolation.exp10Out)
         );
 
         Action actionBottom = new SequenceAction(
-                Actions.moveBy(0, start.len() * 3, maxTime, Interpolation.circle)
+                Actions.moveBy(0, start.len() * 3, maxTime, Interpolation.exp10Out)
         );
 
         Action actionRight = new SequenceAction(
-                Actions.moveBy(-start.len() * 3, 0, maxTime, Interpolation.circle)
+                Actions.moveBy(-start.len() * 3, 0, maxTime, Interpolation.exp10Out)
         );
 
         Action actionLeft = new SequenceAction(
-                Actions.moveBy(start.len() * 3, 0, maxTime, Interpolation.circle)
+                Actions.moveBy(start.len() * 3, 0, maxTime, Interpolation.exp10Out)
         );
 
         switch(orientation) {
@@ -154,19 +157,19 @@ public abstract class AnimatedTable extends Actor {
         Vector2 start = getVectorFrom();
 
         Action actionTop = new SequenceAction(
-                Actions.moveBy(0, start.len() * 3, maxTime, Interpolation.exp5)
+                Actions.moveBy(0, start.len() * 3, maxTime, Interpolation.circle)
         );
 
         Action actionBottom = new SequenceAction(
-                Actions.moveBy(0, -start.len() * 3, maxTime, Interpolation.exp5)
+                Actions.moveBy(0, -start.len() * 3, maxTime, Interpolation.circle)
         );
 
         Action actionRight = new SequenceAction(
-                Actions.moveBy(start.len() * 3, 0, maxTime, Interpolation.exp5)
+                Actions.moveBy(start.len() * 3, 0, maxTime, Interpolation.circle)
         );
 
         Action actionLeft = new SequenceAction(
-                Actions.moveBy(-start.len() * 3, 0, maxTime, Interpolation.exp5)
+                Actions.moveBy(-start.len() * 3, 0, maxTime, Interpolation.circle)
         );
 
         switch(orientation) {

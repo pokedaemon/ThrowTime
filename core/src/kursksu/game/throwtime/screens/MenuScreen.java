@@ -27,8 +27,6 @@ import kursksu.game.throwtime.utils.Constants;
 import kursksu.game.throwtime.utils.Manager;
 
 public class MenuScreen extends State {
-
-    private BitmapFont font;
     private Stage stage;
     private Music music;
     private ButtonsPanel buttons;
@@ -36,10 +34,6 @@ public class MenuScreen extends State {
 
     public MenuScreen(ThrowTime parent, SpriteBatch batch) {
         super(parent, batch);
-        stage = new Stage();
-        background = new Sprite(Manager.getTexture("Background_mini"));
-        buttons = new ButtonsPanel();
-        label = new LabelPanel();
     }
 
     @Override
@@ -77,16 +71,24 @@ public class MenuScreen extends State {
 
     @Override
     public void show() {
+        stage = new Stage();
+        background = new Sprite(Manager.getTexture(Constants.background));
+        buttons = new ButtonsPanel(parent);
+        label = new LabelPanel(parent);
+
         Gdx.input.setInputProcessor(stage);
 
         label.setX((float) Gdx.graphics.getWidth() / 2);
         label.setY((float) Gdx.graphics.getHeight() / (4.05f / 4f));
         label.setOrientation(AnimatedTable.OrientationFrom.Top);
-        label.setMaxTime(0.0f);
-        label.hide();
 
-        label.setMaxTime(1.4f);
-        label.show();
+        if(parent.getStart()) {
+            label.setMaxTime(0.0f);
+            label.hide();
+            label.setMaxTime(1.4f);
+            label.show();
+            parent.setStart(false);
+        }
 
         buttons.setFillParent(true);
         buttons.setX((float) Gdx.graphics.getWidth() / 2);
@@ -99,6 +101,8 @@ public class MenuScreen extends State {
 
         stage.addActor(buttons);
         stage.addActor(label);
+
+        Manager.getMusic(Constants.music).play();
     }
 
     @Override
@@ -114,50 +118,5 @@ public class MenuScreen extends State {
     @Override
     public void dispose() {
         stage.dispose();
-    }
-
-    @Override
-    public boolean keyDown(int keycode) {
-        return false;
-    }
-
-    @Override
-    public boolean keyUp(int keycode) {
-        return false;
-    }
-
-    @Override
-    public boolean keyTyped(char character) {
-        return false;
-    }
-
-    @Override
-    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        return false;
-    }
-
-    @Override
-    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        return false;
-    }
-
-    @Override
-    public boolean touchCancelled(int screenX, int screenY, int pointer, int button) {
-        return false;
-    }
-
-    @Override
-    public boolean touchDragged(int screenX, int screenY, int pointer) {
-        return false;
-    }
-
-    @Override
-    public boolean mouseMoved(int screenX, int screenY) {
-        return false;
-    }
-
-    @Override
-    public boolean scrolled(float amountX, float amountY) {
-        return false;
     }
 }

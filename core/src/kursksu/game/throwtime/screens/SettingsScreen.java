@@ -9,19 +9,19 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 import kursksu.game.throwtime.ThrowTime;
+import kursksu.game.throwtime.ui.AnimatedTable;
 import kursksu.game.throwtime.ui.LabelPanel;
+import kursksu.game.throwtime.ui.SettingsPanel;
+import kursksu.game.throwtime.utils.Constants;
 import kursksu.game.throwtime.utils.Manager;
 
 public class SettingsScreen extends State {
-
     private Stage stage;
     private LabelPanel label;
+    private SettingsPanel settings;
 
     public SettingsScreen(ThrowTime parent, SpriteBatch batch) {
         super(parent, batch);
-        background = new Sprite(Manager.getTexture("Background_mini"));
-        stage = new Stage();
-        label = new LabelPanel();
     }
 
     @Override
@@ -31,6 +31,13 @@ public class SettingsScreen extends State {
         background.draw(batch);
         batch.end();
         stage.draw();
+
+        if(settings.isBackPressed()) {
+            if(!settings.isAnimate()) {
+                settings.setBackPressed(false);
+                parent.changeScreen(ThrowTime.MENU);
+            }
+        }
     }
 
     @Override
@@ -40,11 +47,28 @@ public class SettingsScreen extends State {
 
     @Override
     public void show() {
+        background = new Sprite(Manager.getTexture(Constants.background));
+        stage = new Stage();
+        label = new LabelPanel(parent);
+        settings = new SettingsPanel(parent);
+
         Gdx.input.setInputProcessor(stage);
 
-        label.setX((float) Gdx.graphics.getWidth() / 2);
-        label.setY((float) Gdx.graphics.getHeight() / (4.05f / 4f));
 
+        label.setX(Constants.SCREEN_WIDTH / 2);
+        label.setY(Constants.SCREEN_HEIGHT / (4.05f / 4f));
+
+        settings.setX(Constants.SCREEN_WIDTH / 2);
+        settings.setY(Constants.SCREEN_HEIGHT / 2);
+
+        settings.setOrientation(AnimatedTable.OrientationFrom.Right);
+        settings.setMaxTime(0.0f);
+        settings.hide();
+
+        settings.setMaxTime(0.6f);
+        settings.show();
+
+        stage.addActor(settings);
         stage.addActor(label);
     }
 
@@ -59,57 +83,7 @@ public class SettingsScreen extends State {
     }
 
     @Override
-    public void hide() {
-
-    }
-
-    @Override
     public void dispose() {
-
-    }
-
-    @Override
-    public boolean keyDown(int keycode) {
-        return false;
-    }
-
-    @Override
-    public boolean keyUp(int keycode) {
-        return false;
-    }
-
-    @Override
-    public boolean keyTyped(char character) {
-        return false;
-    }
-
-    @Override
-    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        return false;
-    }
-
-    @Override
-    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        return false;
-    }
-
-    @Override
-    public boolean touchCancelled(int screenX, int screenY, int pointer, int button) {
-        return false;
-    }
-
-    @Override
-    public boolean touchDragged(int screenX, int screenY, int pointer) {
-        return false;
-    }
-
-    @Override
-    public boolean mouseMoved(int screenX, int screenY) {
-        return false;
-    }
-
-    @Override
-    public boolean scrolled(float amountX, float amountY) {
-        return false;
+        stage.dispose();
     }
 }

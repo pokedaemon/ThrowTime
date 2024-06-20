@@ -8,11 +8,16 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 
+import kursksu.game.throwtime.ThrowTime;
 import kursksu.game.throwtime.utils.Manager;
 
-public class ButtonsPanel extends AnimatedTable {
+public final class ButtonsPanel extends AnimatedTable {
 
     private boolean playPressed, settingsPressed, exitPressed;
+
+    public ButtonsPanel(ThrowTime parent) {
+        super(parent);
+    }
 
     @Override
     protected Table prepareTable() {
@@ -21,9 +26,9 @@ public class ButtonsPanel extends AnimatedTable {
 
         playPressed = settingsPressed = exitPressed = false;
 
-        TextButton playButton = new TextButton("PLAY", skin);
-        TextButton settingsButton = new TextButton("SETTINGS", skin);
-        TextButton exitButton = new TextButton("EXIT", skin);
+        TextButton playButton = new TextButton("PLAY", skin, "play");
+        TextButton settingsButton = new TextButton("SETTINGS", skin, "play");
+        TextButton exitButton = new TextButton("EXIT", skin, "play");
 
         main.center();
         main.add(playButton).width(650).height(150);

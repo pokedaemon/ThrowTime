@@ -1,7 +1,11 @@
 package kursksu.game.throwtime.utils;
 
+import static kursksu.game.throwtime.utils.Constants.PPM;
+
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.Disposable;
 
 import java.util.ArrayList;
 
@@ -12,7 +16,7 @@ import kursksu.game.throwtime.actors.Borders;
 import kursksu.game.throwtime.actors.Chalkin;
 import kursksu.game.throwtime.actors.b2Object;
 
-public class GameWorld {
+public class GameWorld implements Disposable {
     private World world;
     private ArrayList<b2Object> objects;
 
@@ -20,23 +24,33 @@ public class GameWorld {
         world = new World(
                 new Vector2(0, -9.81f), false
         );
-        objects = new ArrayList<>(10);
+        objects = new ArrayList<>();
 
-        // fill objects list
-        objects.add(new Chalkin());
-        objects.add(new Bandit());
-        objects.add(new Borders());
-        objects.add(new Ball());
-        objects.add(new Basket());
+        objects.add(new Borders(false, 0, 0));
+        objects.add(new Ball(Constants.WIDTH / 2 / PPM, (float) ((Constants.HEIGHT * 1.2) / PPM)));
     }
 
     public void init() {
         for(b2Object obj : objects) {
-            world.createBody(obj.getBody()).createFixture(obj.getFixture());
+            obj.setBody(world.createBody(obj.getBodyDef()));
+            obj.getBody().createFixture(obj.getFixture());
         }
     }
 
     public void render(float delta) {
-        world.step(delta, 6, 2);
+        world.step(1/60f, 6, 2);
+    }
+
+    public World getWorld() {
+        return this.world;
+    }
+
+    public ArrayList<b2Object> getObjects() {
+        return this.objects;
+    }
+
+    @Override
+    public void dispose() {
+        world.dispose();
     }
 }
