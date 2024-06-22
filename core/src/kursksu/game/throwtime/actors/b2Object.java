@@ -39,4 +39,8 @@ public abstract class b2Object {
     protected abstract Sprite setPicture();
     protected abstract BodyDef setBodyDef(float x, float y);
     protected abstract FixtureDef setFixture();
+
+    public abstract boolean isChain();
+    public abstract boolean isCircle();
+    public abstract boolean isPolygon();
 }

@@ -3,26 +3,28 @@ package kursksu.game.throwtime.actors;
 import static kursksu.game.throwtime.utils.Constants.PPM;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.ChainShape;
+import com.badlogic.gdx.physics.box2d.CircleShape;
+import com.badlogic.gdx.physics.box2d.EdgeShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.physics.box2d.Shape;
 
 import kursksu.game.throwtime.utils.Constants;
 import kursksu.game.throwtime.utils.Manager;
 
 public class Borders extends b2Object {
 
-    private final boolean isVertical;
-
-    public Borders(boolean isVertical, float x, float y) {
+    public Borders(float x, float y) {
         super(x, y);
-        this.isVertical = isVertical;
     }
 
     @Override
     protected Sprite setPicture() {
-        return new Sprite(Manager.getTexture(Constants.ground));
+        return null;
     }
 
     @Override
@@ -30,8 +32,11 @@ public class Borders extends b2Object {
         BodyDef bodyDef = new BodyDef();
 
         bodyDef.type = BodyDef.BodyType.StaticBody;
-        bodyDef.position.set(x, y);
-        bodyDef.fixedRotation = true;
+        bodyDef.position.set(
+                new Vector2(x, y)
+        );
+        bodyDef.angle = 55f;
+        bodyDef.fixedRotation = false;
 
         return bodyDef;
     }
@@ -41,16 +46,8 @@ public class Borders extends b2Object {
         FixtureDef fixtureDef = new FixtureDef();
 
         PolygonShape shape = new PolygonShape();
-        float width, height;
-        if(!isVertical) {
-            width = Constants.WIDTH;
-            height = 3f;
-        }
-        else {
-            width = 3f;
-            height = Constants.HEIGHT;
-        }
-        shape.setAsBox(width / PPM, height / PPM);
+        shape.setAsBox(Constants.WIDTH / PPM, 1 / PPM);
+
 
         fixtureDef.shape = shape;
         fixtureDef.density = 1f;
@@ -58,5 +55,20 @@ public class Borders extends b2Object {
         shape.dispose();
 
         return fixtureDef;
+    }
+
+    @Override
+    public boolean isChain() {
+        return true;
+    }
+
+    @Override
+    public boolean isCircle() {
+        return false;
+    }
+
+    @Override
+    public boolean isPolygon() {
+        return false;
     }
 }

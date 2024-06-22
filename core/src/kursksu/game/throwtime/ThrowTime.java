@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import kursksu.game.throwtime.screens.DebugScreen;
+import kursksu.game.throwtime.screens.Leaderboards;
 import kursksu.game.throwtime.screens.LoadingScreen;
 import kursksu.game.throwtime.screens.MenuScreen;
 import kursksu.game.throwtime.screens.GameScreen;
@@ -24,11 +25,13 @@ public class ThrowTime extends Game {
 	private SettingsScreen settingsScreen;
 	private DebugScreen debugScreen;
 	private LoadingScreen loadingScreen;
+	private Leaderboards leaderboards;
 
 	public static final int MENU     = 0;
 	public static final int GAME     = 1;
 	public static final int SETTINGS = 2;
 	public static final int LOADING  = 4;
+	public static final int LEADERBOARDS = 5;
 
 	public static final int DEBUG    = 3;
 
@@ -76,6 +79,11 @@ public class ThrowTime extends Game {
 				if(loadingScreen == null)
 					loadingScreen = new LoadingScreen(this, batch);
 				this.setScreen(loadingScreen);
+				break;
+			case LEADERBOARDS:
+				if(leaderboards == null)
+					leaderboards = new Leaderboards(this, batch);
+				this.setScreen(leaderboards);
 				break;
 		}
 	}

@@ -9,11 +9,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 
 import kursksu.game.throwtime.ThrowTime;
+import kursksu.game.throwtime.utils.Constants;
 import kursksu.game.throwtime.utils.Manager;
 
 public final class ButtonsPanel extends AnimatedTable {
 
-    private boolean playPressed, settingsPressed, exitPressed;
+    private boolean playPressed, settingsPressed, exitPressed, leaderboardsPressed;
 
     public ButtonsPanel(ThrowTime parent) {
         super(parent);
@@ -24,28 +25,33 @@ public final class ButtonsPanel extends AnimatedTable {
         Skin skin = Manager.getSkin();
         Table main = new Table();
 
-        playPressed = settingsPressed = exitPressed = false;
+        playPressed = settingsPressed = exitPressed = leaderboardsPressed = false;
 
         TextButton playButton = new TextButton("PLAY", skin, "play");
         TextButton settingsButton = new TextButton("SETTINGS", skin, "play");
         TextButton exitButton = new TextButton("EXIT", skin, "play");
+        TextButton leaderboards = new TextButton("LEADERBOARDS", skin, "play");
 
         main.center();
-        main.add(playButton).width(650).height(150);
+        main.add(playButton).width(650).height(150).pad(20);
         main.row();
-        main.add(settingsButton).width(650).height(150).pad(40);
+        main.add(settingsButton).width(650).height(150).pad(20);
         main.row();
-        main.add(exitButton).width(650).height(150);
+        main.add(leaderboards).width(650).height(150).pad(20);
+        main.row();
+        main.add(exitButton).width(650).height(150).pad(20);
         main.row();
 
-        Sound buttonSound = Manager.getSound("button_sound");
+        Sound buttonSound = Manager.getSound(Constants.sound);
+        Sound playSound = Manager.getSound(Constants.playSound);
         final AnimatedTable buttonsPanel = this;
 
         playButton.addListener(
                 new ChangeListener() {
                     @Override
                     public void changed(ChangeEvent event, Actor actor) {
-                        buttonSound.play();
+                        Manager.getMusic(Constants.music).stop();
+                        playSound.play();
                         buttonsPanel.setOrientation(OrientationFrom.Top);
                         playPressed = true;
                         buttonsPanel.hide();
@@ -64,6 +70,16 @@ public final class ButtonsPanel extends AnimatedTable {
                     }
                 }
         );
+
+        leaderboards.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                buttonSound.play();
+                buttonsPanel.setOrientation(OrientationFrom.Left);
+                leaderboardsPressed = true;
+                buttonsPanel.hide();
+            }
+        });
 
         exitButton.addListener(
                 new ChangeListener() {
@@ -92,6 +108,8 @@ public final class ButtonsPanel extends AnimatedTable {
         return settingsPressed;
     }
 
+    public boolean isLeaderboardsPressed() { return leaderboardsPressed; }
+
     public void setPlayPressed(boolean playPressed) {
         this.playPressed = playPressed;
     }
@@ -102,5 +120,9 @@ public final class ButtonsPanel extends AnimatedTable {
 
     public void setExitPressed(boolean exitPressed) {
         this.exitPressed = exitPressed;
+    }
+
+    public void setLeaderboardsPressed(boolean leaderboardsPressed) {
+        this.leaderboardsPressed = leaderboardsPressed;
     }
 }

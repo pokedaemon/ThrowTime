@@ -36,23 +36,21 @@ public class Manager {
         manager.load(picturesPath + chubik + png, Texture.class);
         manager.load(picturesPath + ground + png, Texture.class);
         manager.load(picturesPath + ball + png, Texture.class);
-        Thread.sleep(3);
 
         // sound
-        manager.load(soundPath + "button_sound" + mp3, Sound.class);
+        manager.load(soundPath + Constants.sound + mp3, Sound.class);
+        manager.load(soundPath + Constants.playSound + mp3, Sound.class);
         manager.load(soundPath + "ball_bounce" + mp3, Sound.class);
         manager.load(soundPath + "ball_net" + mp3, Sound.class);
         manager.load(soundPath + "ball_hit_bounce" + mp3, Sound.class);
         manager.load(soundPath + "pistol_fire" + mp3, Sound.class);
-        Thread.sleep(15);
 
         // music
-        manager.load(musicPath + "music.mp3", Music.class);
-        Thread.sleep(2);
-
+        manager.load(musicPath + Constants.music + Constants.mp3, Music.class);
+        manager.load(musicPath + Constants.playMusic + Constants.mp3, Music.class);
 
         // skin
-        manager.load("skin/skin.json", Skin.class);
+        manager.load("skin1/skin.json", Skin.class);
         if(manager.contains(picturesPath + background + png, Texture.class))
             manager.finishLoading();
         else {
@@ -74,7 +72,7 @@ public class Manager {
     }
 
     public static Skin getSkin() {
-        return manager.get("skin/skin.json");
+        return manager.get("skin1/skin.json");
     }
 
     public static boolean update() {

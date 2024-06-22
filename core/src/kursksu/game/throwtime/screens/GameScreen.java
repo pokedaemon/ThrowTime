@@ -14,6 +14,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.MassData;
+import com.badlogic.gdx.math.RandomXS128;
 
 import kursksu.game.throwtime.ThrowTime;
 import kursksu.game.throwtime.actors.b2Object;
@@ -26,10 +27,10 @@ import static kursksu.game.throwtime.utils.Constants.SCREEN_HEIGHT;
 import static kursksu.game.throwtime.utils.Constants.PPM;
 
 public class GameScreen extends State {
-
     GameWorld world;
     Box2DDebugRenderer renderer;
     InputProcessor processor;
+    RandomXS128 randomGenerator;
 
     public GameScreen(ThrowTime parent, SpriteBatch batch) {
         super(parent, batch);
@@ -46,6 +47,9 @@ public class GameScreen extends State {
     public void create() {
         world = new GameWorld();
         world.init();
+
+        Manager.getMusic(Constants.playMusic).play();
+        Manager.getMusic(Constants.playMusic).setLooping(true);
 
         batch.setProjectionMatrix(getViewport().getCamera().combined);
         processor = new InputProcessor() {
@@ -129,6 +133,7 @@ public class GameScreen extends State {
         batch.begin();
 
         for(b2Object p : world.getObjects()) {
+            if(p.isChain()) continue;
             p.getSprite().setPosition(
                     p.getBody().getPosition().x * PPM - p.getSprite().getWidth() / 2,
                     p.getBody().getPosition().y * PPM - p.getSprite().getHeight() / 2
@@ -136,7 +141,12 @@ public class GameScreen extends State {
         }
 
         background.draw(batch);
-        world.getObjects().get(1).getSprite().draw(batch);
+
+        for(b2Object p : world.getObjects()) {
+            if(p.isChain()) continue;
+            p.getSprite().draw(batch);
+        }
+
         batch.end();
 
         renderer.render(world.getWorld(), camera.combined.scl(PPM));
@@ -148,8 +158,8 @@ public class GameScreen extends State {
 
     public void inputUpdate(float delta) {
         if(Gdx.input.isTouched()) {
-            world.getObjects().get(1).getBody().applyForceToCenter(
-                    new Vector2(-10, 0), false
+            world.getObjects().get(world.getObjects().size() - 1).getBody().applyForceToCenter(
+                    new Vector2(0, 5), false
             );
         }
     }

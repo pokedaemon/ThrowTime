@@ -25,4 +25,19 @@ public class Basket extends b2Object {
     protected FixtureDef setFixture() {
         return null;
     }
+
+    @Override
+    public boolean isChain() {
+        return false;
+    }
+
+    @Override
+    public boolean isCircle() {
+        return false;
+    }
+
+    @Override
+    public boolean isPolygon() {
+        return false;
+    }
 }

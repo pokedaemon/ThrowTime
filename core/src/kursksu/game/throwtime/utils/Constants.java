@@ -30,7 +30,7 @@ public final class Constants {
     public static final String mp3 = ".mp3";
 
     // in code we use
-    public static final String background = "Background_mini";
+    public static final String background = "bacground_mini_2";
     public static final String bando = "bando_mini";
     public static final String chalkin = "chalkin_mini";
     public static final String chubik = "chubik";
@@ -38,6 +38,9 @@ public final class Constants {
     public static final String ball = "Ball";
 
     // sounds and music
-    public static final String music = "music";
+    public static final String music = "cool2";
+    public static final String playMusic = "bando_hello";
+
     public static final String sound = "button_sound";
+    public static final String playSound = "bando_music";
 }

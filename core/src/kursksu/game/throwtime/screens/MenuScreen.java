@@ -64,6 +64,12 @@ public class MenuScreen extends State {
                 Gdx.app.exit();
             }
         }
+        if(buttons.isLeaderboardsPressed()) {
+            if(!buttons.isAnimate()) {
+                buttons.setLeaderboardsPressed(false);
+                parent.changeScreen(ThrowTime.LEADERBOARDS);
+            }
+        }
     }
 
     @Override

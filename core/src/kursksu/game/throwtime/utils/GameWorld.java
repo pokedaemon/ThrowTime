@@ -14,6 +14,7 @@ import kursksu.game.throwtime.actors.Bandit;
 import kursksu.game.throwtime.actors.Basket;
 import kursksu.game.throwtime.actors.Borders;
 import kursksu.game.throwtime.actors.Chalkin;
+import kursksu.game.throwtime.actors.Chubik;
 import kursksu.game.throwtime.actors.b2Object;
 
 public class GameWorld implements Disposable {
@@ -25,8 +26,10 @@ public class GameWorld implements Disposable {
                 new Vector2(0, -9.81f), false
         );
         objects = new ArrayList<>();
-
-        objects.add(new Borders(false, 0, 0));
+        objects.add(new Bandit((Constants.WIDTH - 20) / PPM, 50 / Constants.PPM));
+        objects.add(new Borders(Constants.WIDTH / 2 / PPM, -10 / PPM));
+        objects.add(new Chalkin(20 / PPM, 50 / PPM));
+        objects.add(new Chubik(Constants.WIDTH / 2 / PPM, Constants.HEIGHT / 2 / PPM));
         objects.add(new Ball(Constants.WIDTH / 2 / PPM, (float) ((Constants.HEIGHT * 1.2) / PPM)));
     }
 

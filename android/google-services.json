@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "964231923129",
+    "firebase_url": "https://throwtime-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "throwtime",
+    "storage_bucket": "throwtime.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:964231923129:android:acfda93dbca4763bca2268",
+        "android_client_info": {
+          "package_name": "kursksu.game.throwtime"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtY-UCeqtct_RTdWODcQhmRoUomYVzBow"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

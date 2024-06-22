@@ -29,7 +29,7 @@ public class Ball extends b2Object {
 
         def.type = BodyDef.BodyType.DynamicBody;
         def.position.set(x, y);
-        def.fixedRotation = false;
+        def.fixedRotation = true;
 
         return def;
     }
@@ -43,9 +43,26 @@ public class Ball extends b2Object {
 
         fixtureDef.density = 1f;
         fixtureDef.shape = shape;
+        fixtureDef.restitution = 0.7f;
+        fixtureDef.friction = 0.2f;
 
         shape.dispose();
 
         return fixtureDef;
+    }
+
+    @Override
+    public boolean isChain() {
+        return false;
+    }
+
+    @Override
+    public boolean isCircle() {
+        return true;
+    }
+
+    @Override
+    public boolean isPolygon() {
+        return false;
     }
 }

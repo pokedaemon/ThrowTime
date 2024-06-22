@@ -28,7 +28,6 @@ public class LoadingScreen extends State {
 
         if(Manager.getProgress() == 1f && !thread.isAlive()) {
             parent.changeScreen(ThrowTime.MENU);
-            thread.interrupt();
         }
     }
 
