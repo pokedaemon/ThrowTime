@@ -29,7 +29,6 @@ public class GameWorld implements Disposable {
         objects.add(new Bandit((Constants.WIDTH - 20) / PPM, 50 / Constants.PPM));
         objects.add(new Borders(Constants.WIDTH / 2 / PPM, -10 / PPM));
         objects.add(new Chalkin(20 / PPM, 50 / PPM));
-        objects.add(new Chubik(Constants.WIDTH / 2 / PPM, Constants.HEIGHT / 2 / PPM));
         objects.add(new Ball(Constants.WIDTH / 2 / PPM, (float) ((Constants.HEIGHT * 1.2) / PPM)));
     }
 
@@ -38,6 +37,13 @@ public class GameWorld implements Disposable {
             obj.setBody(world.createBody(obj.getBodyDef()));
             obj.getBody().createFixture(obj.getFixture());
         }
+    }
+
+    public void addChubikAndMove(float x, float y) {
+        Chubik chubik = new Chubik(x / PPM, y / PPM);
+        objects.add(chubik);
+        chubik.setBody(world.createBody(chubik.getBodyDef()));
+        chubik.getBody().createFixture(chubik.getFixture());
     }
 
     public void render(float delta) {

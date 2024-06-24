@@ -1,5 +1,3 @@
-package kursksu.game.throwtime.utils;
+package kursksu.game.throwtime.db;
 
-public interface FirebaseInterface {
-
-}
+public interface FirebaseInterface {}

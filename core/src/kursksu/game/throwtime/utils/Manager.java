@@ -9,7 +9,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.utils.Disposable;
 
 import static kursksu.game.throwtime.utils.Constants.ball;
 import static kursksu.game.throwtime.utils.Constants.musicPath;
@@ -22,6 +21,7 @@ import static kursksu.game.throwtime.utils.Constants.bando;
 import static kursksu.game.throwtime.utils.Constants.chalkin;
 import static kursksu.game.throwtime.utils.Constants.chubik;
 import static kursksu.game.throwtime.utils.Constants.ground;
+import static kursksu.game.throwtime.utils.Constants.clock;
 
 public class Manager {
 
@@ -36,6 +36,7 @@ public class Manager {
         manager.load(picturesPath + chubik + png, Texture.class);
         manager.load(picturesPath + ground + png, Texture.class);
         manager.load(picturesPath + ball + png, Texture.class);
+        manager.load(picturesPath + clock + png, Texture.class);
 
         // sound
         manager.load(soundPath + Constants.sound + mp3, Sound.class);

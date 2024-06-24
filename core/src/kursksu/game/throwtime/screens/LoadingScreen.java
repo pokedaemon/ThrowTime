@@ -17,7 +17,6 @@ public class LoadingScreen extends State {
 
     public LoadingScreen(ThrowTime parent, SpriteBatch batch) {
         super(parent, batch);
-        stage = new Stage(getViewport());
     }
 
     @Override
@@ -38,6 +37,8 @@ public class LoadingScreen extends State {
 
     @Override
     public void show() {
+        stage = new Stage(getViewport());
+
         this.getViewport().setWorldWidth(Constants.LOAD_WIDTH);
         this.getViewport().setWorldHeight(Constants.LOAD_HEIGHT);
         this.getViewport().apply(true);
@@ -76,6 +77,6 @@ public class LoadingScreen extends State {
 
     @Override
     public void dispose() {
-
+        stage.dispose();
     }
 }

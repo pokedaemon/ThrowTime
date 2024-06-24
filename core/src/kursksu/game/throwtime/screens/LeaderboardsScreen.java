@@ -8,12 +8,12 @@ import kursksu.game.throwtime.ThrowTime;
 import kursksu.game.throwtime.ui.LeaderboardsPanel;
 import kursksu.game.throwtime.utils.Constants;
 
-public class Leaderboards extends State {
+public class LeaderboardsScreen extends State {
 
     private LeaderboardsPanel leaderboardsPanel;
     private Stage stage;
 
-    public Leaderboards(ThrowTime parent, SpriteBatch batch) {
+    public LeaderboardsScreen(ThrowTime parent, SpriteBatch batch) {
         super(parent, batch);
     }
 
@@ -48,6 +48,6 @@ public class Leaderboards extends State {
 
     @Override
     public void dispose() {
-
+        stage.dispose();
     }
 }

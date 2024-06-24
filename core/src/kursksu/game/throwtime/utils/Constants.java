@@ -36,6 +36,7 @@ public final class Constants {
     public static final String chubik = "chubik";
     public static final String ground = "ground_mini1";
     public static final String ball = "Ball";
+    public static final String clock = "Clock";
 
     // sounds and music
     public static final String music = "cool2";

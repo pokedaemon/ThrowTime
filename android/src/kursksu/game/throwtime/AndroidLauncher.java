@@ -23,15 +23,11 @@ public class AndroidLauncher extends AndroidApplication {
 	protected void onCreate (Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
+		FirebaseCore firebaseCore = new FirebaseCore();
 
 		config.useAccelerometer = false;
 		config.useCompass = false;
 
-		firebaseDatabase = FirebaseDatabase.getInstance
-				("https://throwtime-default-rtdb.europe-west1.firebasedatabase.app/");
-
-
-
-		initialize(new ThrowTime(), config);
+		initialize(new ThrowTime(firebaseCore), config);
 	}
 }
