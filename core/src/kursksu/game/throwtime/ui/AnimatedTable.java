@@ -7,7 +7,6 @@ import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.actions.AlphaAction;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
@@ -122,19 +121,19 @@ public abstract class AnimatedTable extends Actor {
         Vector2 start = getVectorFrom();
 
         Action actionTop = new SequenceAction(
-                Actions.moveBy(0, -start.len() * 3, maxTime, Interpolation.exp10Out)
+                Actions.moveBy(0, -start.len(), maxTime, Interpolation.exp10Out)
         );
 
         Action actionBottom = new SequenceAction(
-                Actions.moveBy(0, start.len() * 3, maxTime, Interpolation.exp10Out)
+                Actions.moveBy(0, start.len(), maxTime, Interpolation.exp10Out)
         );
 
         Action actionRight = new SequenceAction(
-                Actions.moveBy(-start.len() * 3, 0, maxTime, Interpolation.exp10Out)
+                Actions.moveBy(-start.len(), 0, maxTime, Interpolation.exp10Out)
         );
 
         Action actionLeft = new SequenceAction(
-                Actions.moveBy(start.len() * 3, 0, maxTime, Interpolation.exp10Out)
+                Actions.moveBy(start.len(), 0, maxTime, Interpolation.exp10Out)
         );
 
         switch(orientation) {
@@ -157,19 +156,19 @@ public abstract class AnimatedTable extends Actor {
         Vector2 start = getVectorFrom();
 
         Action actionTop = new SequenceAction(
-                Actions.moveBy(0, start.len() * 3, maxTime, Interpolation.circle)
+                Actions.moveBy(0, start.len(), maxTime, Interpolation.circle)
         );
 
         Action actionBottom = new SequenceAction(
-                Actions.moveBy(0, -start.len() * 3, maxTime, Interpolation.circle)
+                Actions.moveBy(0, -start.len(), maxTime, Interpolation.circle)
         );
 
         Action actionRight = new SequenceAction(
-                Actions.moveBy(start.len() * 3, 0, maxTime, Interpolation.circle)
+                Actions.moveBy(start.len(), 0, maxTime, Interpolation.circle)
         );
 
         Action actionLeft = new SequenceAction(
-                Actions.moveBy(-start.len() * 3, 0, maxTime, Interpolation.circle)
+                Actions.moveBy(-start.len(), 0, maxTime, Interpolation.circle)
         );
 
         switch(orientation) {
@@ -202,10 +201,10 @@ public abstract class AnimatedTable extends Actor {
                 start = new Vector2(0, getY());
                 break;
             case Top:
-                start = new Vector2(getX(), 0);
+                start = new Vector2(getX() + Constants.SCREEN_HEIGHT / 2, 0);
                 break;
             case Bottom:
-                start = new Vector2(getX(), -getHeight());
+                start = new Vector2(getX() + Constants.SCREEN_HEIGHT / 2, -getHeight());
                 break;
             default:
                 break;

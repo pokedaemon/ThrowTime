@@ -1,8 +1,6 @@
 package kursksu.game.throwtime.utils;
 
-
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.physics.box2d.BodyDef;
 
 public final class Constants {
 
@@ -32,6 +30,7 @@ public final class Constants {
     // in code we use
     public static final String background = "bacground_mini_2";
     public static final String bando = "bando_mini";
+    public static final String backboard = "backboard_mini";
     public static final String chalkin = "chalkin_mini";
     public static final String chubik = "chubik";
     public static final String ground = "ground_mini1";
@@ -44,4 +43,8 @@ public final class Constants {
 
     public static final String sound = "button_sound";
     public static final String playSound = "bando_music";
+
+    public static final String dbUrl = "https://throwtime-default-rtdb.europe-west1.firebasedatabase.app/";
+
+    public static final Integer timer = 20;
 }

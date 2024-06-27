@@ -1,7 +1,6 @@
 package kursksu.game.throwtime.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -19,8 +18,6 @@ import kursksu.game.throwtime.utils.Constants;
 import kursksu.game.throwtime.utils.GameWorld;
 import kursksu.game.throwtime.utils.Manager;
 
-import static kursksu.game.throwtime.utils.Constants.SCREEN_WIDTH;
-import static kursksu.game.throwtime.utils.Constants.SCREEN_HEIGHT;
 import static kursksu.game.throwtime.utils.Constants.PPM;
 
 import java.util.ArrayList;
@@ -32,9 +29,12 @@ public class GameScreen extends State {
     private Stage stage;
     private GameUIPanel uiPanel;
     private ShapeRenderer shape;
+    private GestureDetector detector;
 
-    float delta;
-    float linearImpulseStrength;
+    private float delta;
+    private float linearImpulseStrength;
+
+    private ArrayList<Vector2> points;
 
     public GameScreen(ThrowTime parent, SpriteBatch batch) {
         super(parent, batch);
@@ -52,15 +52,19 @@ public class GameScreen extends State {
         linearImpulseStrength = 2.4f;
 
         world = new GameWorld();
-        world.addChubikAndMove(Constants.WIDTH / 2, SCREEN_HEIGHT / 2);
         world.init();
 
         stage = new Stage(this.getViewport());
+        shape = new ShapeRenderer();
+        shape.setAutoShapeType(true);
 
         Manager.getMusic(Constants.playMusic).play();
         Manager.getMusic(Constants.playMusic).setLooping(true);
 
         batch.setProjectionMatrix(getViewport().getCamera().combined);
+        shape.setProjectionMatrix(getViewport().getCamera().combined.scl(PPM));
+        shape.updateMatrices();
+        shape.flush();
 
         inputCreate();
 
@@ -133,7 +137,16 @@ public class GameScreen extends State {
 
         stage.act();
         stage.draw();
-        renderer.render(world.getWorld(), camera.combined.scl(PPM));
+        // renderer.render(world.getWorld(), camera.combined.scl(PPM));
+
+        if(detector.isPanning()) {
+            shape.begin();
+            for(Vector2 v : points) {
+                shape.set(ShapeRenderer.ShapeType.Point);
+                shape.circle(v.x, v.y, 16f / PPM);
+            }
+            shape.end();
+        }
 
         if(uiPanel.getTime() == -1) {
             parent.changeScreen(ThrowTime.OVER);
@@ -145,69 +158,73 @@ public class GameScreen extends State {
     }
 
     public void inputCreate() {
-        GestureDetector gesture = new GestureDetector(
+        detector = new GestureDetector(
                 new GestureDetector.GestureListener() {
                     @Override
                     public boolean touchDown(float x, float y, int pointer, int button) {
+                        Gdx.app.log("GameScreen", "touchDown detected!");
                         return false;
                     }
 
                     @Override
                     public boolean tap(float x, float y, int count, int button) {
+                        Gdx.app.log("GameScreen", "tap detected!");
                         return false;
                     }
 
                     @Override
                     public boolean longPress(float x, float y) {
+                        Gdx.app.log("GameScreen", "longPress detected!");
                         return false;
                     }
 
                     @Override
                     public boolean fling(float velocityX, float velocityY, int button) {
+                        Gdx.app.log("GameScreen", "fling detected!");
                         return false;
                     }
 
                     @Override
                     public boolean pan(float x, float y, float deltaX, float deltaY) {
+                        Gdx.app.log("GameScreen", "pan detected!");
                         b2Object ball = world.getObjects().get(world.getObjects().size() - 1);
                         float x_ball = ball.getBody().getPosition().x,
                                 y_ball = ball.getBody().getPosition().y;
                         Vector2 start = new Vector2(x_ball, y_ball);
                         Vector2 initVelocity = new Vector2(
-                                x - deltaX, y - deltaY
-                        ).scl(linearImpulseStrength);
+                                x + deltaX, y + deltaY
+                        );
 
-                        shape.setProjectionMatrix(camera.combined.scl(PPM));
-                        shape.begin();
-                        for(Vector2 v : trajectory(initVelocity, start, 10, 1f/60f)) {
-                            shape.circle(v.x, v.y, 15f);
-                        }
-                        shape.end();
+                        points = trajectory(initVelocity, start, 1, 1f/60f);
 
                         return true;
                     }
 
                     @Override
                     public boolean panStop(float x, float y, int pointer, int button) {
+                        Gdx.app.log("GameScreen", "panStop detected!");
                         return false;
                     }
 
                     @Override
                     public boolean zoom(float initialDistance, float distance) {
+                        Gdx.app.log("GameScreen", "zoom detected!");
                         return false;
                     }
 
                     @Override
                     public boolean pinch(Vector2 initialPointer1, Vector2 initialPointer2, Vector2 pointer1, Vector2 pointer2) {
+                        Gdx.app.log("GameScreen", "pinch detected!");
                         return false;
                     }
 
                     @Override
                     public void pinchStop() {
-
+                        Gdx.app.log("GameScreen", "pinchStop detected!");
                     }
                 }
         );
+        Gdx.input.setInputProcessor(detector);
     }
 
     private ArrayList<Vector2> trajectory(Vector2 initVelocity, Vector2 startPos, int steps, float delta) {

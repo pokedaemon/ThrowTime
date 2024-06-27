@@ -3,7 +3,6 @@ package kursksu.game.throwtime.utils;
 import static kursksu.game.throwtime.utils.Constants.PPM;
 
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Disposable;
 
@@ -26,9 +25,13 @@ public class GameWorld implements Disposable {
                 new Vector2(0, -9.81f), false
         );
         objects = new ArrayList<>();
-        objects.add(new Bandit((Constants.WIDTH - 20) / PPM, 50 / Constants.PPM));
+        // main of world
         objects.add(new Borders(Constants.WIDTH / 2 / PPM, -10 / PPM));
+        objects.add(new Bandit((Constants.WIDTH - 20) / PPM, 50 / Constants.PPM));
         objects.add(new Chalkin(20 / PPM, 50 / PPM));
+
+        objects.add(new Chubik(Constants.WIDTH / 2 / PPM, Constants.HEIGHT / 2 / PPM));
+        objects.add(new Basket(((Constants.WIDTH - 65) / PPM), (Constants.HEIGHT * 2f/3) / PPM));
         objects.add(new Ball(Constants.WIDTH / 2 / PPM, (float) ((Constants.HEIGHT * 1.2) / PPM)));
     }
 
@@ -37,13 +40,6 @@ public class GameWorld implements Disposable {
             obj.setBody(world.createBody(obj.getBodyDef()));
             obj.getBody().createFixture(obj.getFixture());
         }
-    }
-
-    public void addChubikAndMove(float x, float y) {
-        Chubik chubik = new Chubik(x / PPM, y / PPM);
-        objects.add(chubik);
-        chubik.setBody(world.createBody(chubik.getBodyDef()));
-        chubik.getBody().createFixture(chubik.getFixture());
     }
 
     public void render(float delta) {

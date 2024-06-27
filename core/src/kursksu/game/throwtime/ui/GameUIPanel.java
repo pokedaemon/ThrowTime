@@ -30,7 +30,7 @@ public final class GameUIPanel extends AnimatedTable {
         table.setDebug(true);
 
         balls = 0;
-        time = 5;
+        time = Constants.timer;
 
         Label.LabelStyle style = new Label.LabelStyle();
 
@@ -43,10 +43,10 @@ public final class GameUIPanel extends AnimatedTable {
         Image timeImage = new Image(Manager.getTexture(Constants.clock));
 
         table.add(ballsImage).width(17).height(17).padRight(5);
-        table.add(ballsLabel).width(30).height(17);
+        table.add(ballsLabel);
         table.row();
         table.add(timeImage).width(17).height(17).padRight(5).padTop(2);
-        table.add(timeLabel).width(30);
+        table.add(timeLabel);
 
         return table;
     }

@@ -51,6 +51,7 @@ public class SettingsScreen extends State {
 
         Gdx.input.setInputProcessor(stage);
 
+        parent.getFirebase().test();
 
         label.setX(Constants.SCREEN_WIDTH / 2);
         label.setY(Constants.SCREEN_HEIGHT / (4.05f / 4f));
